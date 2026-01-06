@@ -4,7 +4,8 @@
     "skills": "COMPÉTENCES",
     "work": "PROJETS",
     "contact": "CONTACT",
-    "cv": "CV"
+    "cv": "CV",
+    "cvFile": "CV-FR.pdf"
   },
   "hero": {
     "hello": "Salut ! 👋",

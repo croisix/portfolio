@@ -4,7 +4,8 @@
     "skills": "SKILLS",
     "work": "WORK",
     "contact": "CONTACT",
-    "cv": "CV"
+    "cv": "CV",
+    "cvFile": "CV-EN.pdf"
   },
   "hero": {
     "hello": "Hey! 👋",

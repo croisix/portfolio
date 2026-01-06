@@ -121,7 +121,15 @@ async function loadLanguage(lang) {
     const data = await res.json();
     window.i18nData = data;
 
+    // --- CV BUTTON ---
+    const cvBtn = document.getElementById('cv-btn');
+    if(cvBtn && data.nav.cvFile) {
+        cvBtn.href = data.nav.cvFile;
+        cvBtn.textContent = data.nav.cv;
+        cvBtn.innerHTML += `<svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>`;
+    }
 
+    // --- Texte i18n ---
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const keys = el.dataset.i18n.split('.');
         let value = data;
@@ -129,39 +137,39 @@ async function loadLanguage(lang) {
         if (value) el.textContent = value;
     });
 
-    // --- Génération des projets
+    // --- Génération des projets ---
     elements.projectContainer.innerHTML = '';
     const projects = data.work.projects;
 
     for (const key in projects) {
-    const project = projects[key];
+        const project = projects[key];
 
-    const card = document.createElement('a');
-    card.href = "#";
-    card.classList.add('project-card', 'text-hover-target');
-    if (project.highlight) card.classList.add('highlight-card');
+        const card = document.createElement('a');
+        card.href = "#";
+        card.classList.add('project-card', 'text-hover-target');
+        if (project.highlight) card.classList.add('highlight-card');
 
-    card.dataset.category = project.category;
-    card.dataset.title = project.title;
-    card.dataset.desc = project.desc;
-    card.dataset.tags = project.tags ? project.tags.join(',') : '';
-    card.dataset.year = project.year || '';
-    card.dataset.icon = project.icon || '';
-    card.dataset.modalImage = project.modalImage || '';
+        card.dataset.category = project.category;
+        card.dataset.title = project.title;
+        card.dataset.desc = project.desc;
+        card.dataset.tags = project.tags ? project.tags.join(',') : '';
+        card.dataset.year = project.year || '';
+        card.dataset.icon = project.icon || '';
+        card.dataset.modalImage = project.modalImage || '';
 
-    card.innerHTML = `
-        ${project.icon ? `<img src="${project.icon}" alt="${project.title} icon" class="project-icon">` : ''}
-        <span>${project.category.split(' - ').pop()}</span>
-        <h4>${project.title}</h4>
-    `;
+        card.innerHTML = `
+            ${project.icon ? `<img src="${project.icon}" alt="${project.title} icon" class="project-icon">` : ''}
+            <span>${project.category.split(' - ').pop()}</span>
+            <h4>${project.title}</h4>
+        `;
 
-    card.addEventListener('click', (e) => {
-        e.preventDefault();
-        openModal(card);
-    });
+        card.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal(card);
+        });
 
-    elements.projectContainer.appendChild(card);
-}
+        elements.projectContainer.appendChild(card);
+    }
 
     document.documentElement.lang = lang;
     localStorage.setItem('lang', lang);
