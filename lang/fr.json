@@ -7,9 +7,9 @@
     "cv": "CV"
   },
   "hero": {
-    "hello": "Hey ! 👋",
-    "subtitle": "I am a",
-    "role": "DEVELOPER"
+    "hello": "Salut ! 👋",
+    "subtitle": "Je suis un",
+    "role": "DEVELOPPEUR"
   },
   "scroll": {
     "down": "SCROLL DOWN"
@@ -29,21 +29,51 @@
   "work": {
     "title": "Mes projets",
     "projects": {
-      "flower": {
-        "category": "E-COMMERCE - 2024",
-        "title": "FLOWER SHOP",
-        "desc": "Une plateforme e-commerce complète développée avec Laravel et Stripe."
+      "pacman_java": {
+        "category": "JEU - 2025",
+        "title": "Pacman",
+        "desc": "Un jeu Pac‑Man développé en JavaFX dans le cadre d’un projet scolaire.",
+        "tags": ["Java", "JavaFX", "POO"],
+        "icon": "images/projects/icons/pacman.png",
+        "modalImage": "images/projects/modal/pacman.png"
       },
-      "portfolio": {
-        "category": "PORTFOLIO - 2025",
-        "title": "MON PORTFOLIO",
-        "desc": "Portfolio personnel conçu pour démontrer mes compétences en UI/UX."
+      "cinehub": {
+        "category": "SITE WEB - 2025",
+        "title": "CinéHub",
+        "desc": "Application web Laravel pour noter et découvrir des films.",
+        "tags": ["Laravel", "Blade", "PHP"],
+        "icon": "images/projects/icons/cinehub.png",
+        "modalImage": "images/projects/modal/cinehub.png"
+      },
+      "web_marathon": {
+        "category": "SITE WEB - 2025",
+        "title": "Marathon du Web",
+        "desc": "Projet collaboratif avec étudiants en informatique et MMI pour créer un site web à propos d'un type de musique en 2 jours.",
+        "tags": ["Laravel", "Blade", "PHP"],
+        "icon": "images/projects/icons/marathon.png",
+        "modalImage": "images/projects/modal/marathon.png"
+      },
+      "find_the_cocktail": {
+        "category": "Jeu Web - 2025",
+        "title": "Trouve le Cocktail",
+        "desc": "Mini‑jeu Flask pour deviner ingrédients de cocktails.",
+        "tags": ["Python", "Flask", "HTML", "CSS"],
+        "icon": "images/projects/icons/alcool.png",
+        "modalImage": "images/projects/modal/alcool.png"
+      },
+      "wedding_website": {
+        "category": "SITE STATIQUE - 2024",
+        "title": "Site de mariage",
+        "desc": "Mon premier site statique réalisé pour un projet universitaire.",
+        "tags": ["HTML", "CSS"],
+        "icon": "images/projects/icons/mariage.png",
+        "modalImage": "images/projects/modal/mariage.png"
       }
     }
   },
   "contact": {
     "index": "0.4 • CONTACT",
-    "title": "Une idée de projet ? "
+    "title": "Une idée de projet ?"
   },
   "footer": {
     "copyright": "© 2026 Enzo Fantasia. Tous droits réservés."

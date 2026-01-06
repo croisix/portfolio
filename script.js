@@ -7,35 +7,33 @@ const elements = {
     scrollButton: document.querySelector('.scroll-trigger'),
     modal: document.getElementById('projectModal'),
     modalCloseBtn: document.getElementById('closeModal'),
-    projectCards: document.querySelectorAll('.project-card'),
+    projectContainer: document.querySelector('.bento-grid'),
     textTargets: document.querySelectorAll('.text-hover-target, h2, h3, p, a, button'),
     safeZones: document.querySelectorAll('.safe-zone, img')
 };
 
-// --- GESTION DU CURSEUR PERSONNALISÉ ---
+// --- CURSEUR PERSONNALISÉ ---
 document.addEventListener('mousemove', (e) => {
-    // Suit la souris
     elements.cursor.style.left = `${e.clientX}px`;
     elements.cursor.style.top = `${e.clientY}px`;
 });
 
-// Effet de grossissement sur les textes
 elements.textTargets.forEach(el => {
     el.addEventListener('mouseenter', () => elements.cursor.classList.add('hovered'));
     el.addEventListener('mouseleave', () => elements.cursor.classList.remove('hovered'));
 });
 
-// Effet de couleur inversée
 elements.safeZones.forEach(el => {
     el.addEventListener('mouseenter', () => document.body.classList.add('no-blend'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('no-blend'));
 });
 
-// --- GESTION DU SCROLL & COULEURS ---
+// --- SCROLL ET COULEURS ---
 window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     const aboutTop = elements.aboutSection.offsetTop;
     const triggerRect = elements.themeTrigger.getBoundingClientRect();
+    
     if (triggerRect.top < window.innerHeight / 2) {
         document.body.classList.add('inverted');
         elements.navbar.classList.remove('nav-dark');
@@ -49,27 +47,42 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Scroll fluide vers About
-elements.scrollButton.addEventListener('click', () => {
-    elements.aboutSection.scrollIntoView({ behavior: 'smooth' });
-});
+if(elements.scrollButton){
+    elements.scrollButton.addEventListener('click', () => {
+        elements.aboutSection.scrollIntoView({ behavior: 'smooth' });
+    });
+}
 
-// --- GESTION DE LA MODALE PROJET ---
+// --- MODALE PROJET ---
 const openModal = (card) => {
-    // Récupération des données HTML
     const data = {
         category: card.dataset.category,
         title: card.dataset.title,
         desc: card.dataset.desc,
-        tags: card.dataset.tags ? card.dataset.tags.split(',') : []
+        tags: card.dataset.tags ? card.dataset.tags.split(',') : [],
+        modalImage: card.dataset.modalImage // Assurez-vous que c'est défini dans le JSON
     };
 
-    // Injection des données
+    const modalContainer = document.getElementById('modalDataContainer');
+
+    // Supprimer l'image précédente si elle existe
+    const existingImg = modalContainer.querySelector('.modal-project-image');
+    if (existingImg) existingImg.remove();
+
+    // Ajouter l'image du projet
+    if (data.modalImage) {
+        const img = document.createElement('img');
+        img.src = data.modalImage;
+        img.alt = data.title;
+        img.classList.add('modal-project-image');
+        modalContainer.prepend(img); // derrière le contenu grâce au z-index CSS
+    }
+
+    // Injection du texte et tags
     document.getElementById('modalCategory').textContent = data.category;
     document.getElementById('modalTitle').textContent = data.title;
     document.getElementById('modalDesc').textContent = data.desc;
 
-    // Création des tags
     const tagsContainer = document.getElementById('modalTags');
     tagsContainer.innerHTML = '';
     data.tags.forEach(tag => {
@@ -79,41 +92,35 @@ const openModal = (card) => {
         tagsContainer.appendChild(span);
     });
 
-    // Affichage
+    // Affichage modale
     elements.modal.classList.add('active');
     document.body.classList.add('no-scroll');
 };
 
+// Fermeture
 const closeModal = () => {
     elements.modal.classList.remove('active');
     document.body.classList.remove('no-scroll');
 };
-
-// Écouteurs d'événements Modale
-elements.projectCards.forEach(card => card.addEventListener('click', (e) => {
-    e.preventDefault();
-    openModal(card);
-}));
-
 elements.modalCloseBtn.addEventListener('click', closeModal);
-
-// Fermer en cliquant en dehors
 elements.modal.addEventListener('click', (e) => {
     if (e.target === elements.modal) closeModal();
 });
 
-// Bouton Retour en haut
+// --- BACK TO TOP ---
 document.querySelector('.back-to-top').addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 // --- I18N / MULTI-LANGUES ---
-let currentLang = localStorage.getItem('lang') || 'en';
+let currentLang = localStorage.getItem('lang') || 'fr';
 
 async function loadLanguage(lang) {
     const res = await fetch(`lang/${lang}.json`);
     const data = await res.json();
+    window.i18nData = data;
+
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const keys = el.dataset.i18n.split('.');
@@ -122,30 +129,48 @@ async function loadLanguage(lang) {
         if (value) el.textContent = value;
     });
 
-    // Projets (dataset)
+    // --- Génération des projets
+    elements.projectContainer.innerHTML = '';
     const projects = data.work.projects;
-    document.querySelectorAll('.project-card').forEach(card => {
-        const key = card.querySelector('h4')?.textContent.toLowerCase().includes('flower')
-            ? 'flower'
-            : 'portfolio';
 
-        card.dataset.category = projects[key].category;
-        card.dataset.title = projects[key].title;
-        card.dataset.desc = projects[key].desc;
+    for (const key in projects) {
+    const project = projects[key];
+
+    const card = document.createElement('a');
+    card.href = "#";
+    card.classList.add('project-card', 'text-hover-target');
+    if (project.highlight) card.classList.add('highlight-card');
+
+    card.dataset.category = project.category;
+    card.dataset.title = project.title;
+    card.dataset.desc = project.desc;
+    card.dataset.tags = project.tags ? project.tags.join(',') : '';
+    card.dataset.year = project.year || '';
+    card.dataset.icon = project.icon || '';
+    card.dataset.modalImage = project.modalImage || '';
+
+    card.innerHTML = `
+        ${project.icon ? `<img src="${project.icon}" alt="${project.title} icon" class="project-icon">` : ''}
+        <span>${project.category.split(' - ').pop()}</span>
+        <h4>${project.title}</h4>
+    `;
+
+    card.addEventListener('click', (e) => {
+        e.preventDefault();
+        openModal(card);
     });
+
+    elements.projectContainer.appendChild(card);
+}
 
     document.documentElement.lang = lang;
     localStorage.setItem('lang', lang);
 }
-
-// Bouton langue
 const langBtn = document.getElementById('lang-switch');
-if (langBtn) {
-    langBtn.addEventListener('click', () => {
-        currentLang = currentLang === 'en' ? 'fr' : 'en';
-        langBtn.textContent = currentLang === 'en' ? 'FR' : 'EN';
-        loadLanguage(currentLang);
-    });
-}
+langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'fr' : 'en';
+    langBtn.textContent = currentLang === 'en' ? 'FR' : 'EN';
+    loadLanguage(currentLang);
+});
 
 loadLanguage(currentLang);

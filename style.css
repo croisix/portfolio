@@ -130,7 +130,9 @@ nav.nav-dark .lang-btn:hover {
 }
 .hero-bg {
     position: absolute; inset: 0; z-index: 0;
-    background: url('images/Background.png') center/cover no-repeat;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), 
+        url('images/Background.png') center/cover no-repeat;
 }
 .stack-container { position: relative; width: fit-content; text-align: center; }
 
@@ -154,10 +156,11 @@ nav.nav-dark .lang-btn:hover {
     z-index: 3;
 }
 .flower-overlay {
-    position: absolute; top: 50%; left: 50%;
+    position: absolute; top: 72%; left: 50%;
     transform: translate(-50%, -50%);
     width: 100vw; height: 100vh;
     pointer-events: none; z-index: 2;
+    opacity: 75%;
 }
 .flower-overlay img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -277,15 +280,52 @@ body.inverted .fade-separator {
 .work-header h2 { font-family: 'Space Mono'; font-size: 3rem; text-transform: uppercase; }
 .bento-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem; }
 .project-card {
-    background: #e5e5e5; height: 450px; padding: 2.5rem;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    text-decoration: none; color: black; border-radius: 4px;
-    transition: transform 0.3s; position: relative; overflow: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    height: 450px; 
+    padding: 2.5rem;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-end;
+    text-decoration: none; 
+    color: inherit; 
+    border-radius: 12px;
+    transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+    position: relative; 
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
-.project-card:hover { transform: translateY(-10px); }
-.project-card.highlight-card { background: var(--primary); }
-.project-card h4 { font-family: 'Oswald'; font-size: 3.5rem; line-height: 1; z-index: 2; }
-.project-card span { font-weight: 700; font-size: 0.8rem; opacity: 0.7; z-index: 2; margin-bottom: 0.5rem; }
+.project-card .project-icon {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto 1rem;
+    border-radius: 8px;
+}
+
+.project-card.highlight-card { 
+    background: var(--primary); 
+    color: #000; 
+}
+.project-card h4 { 
+    font-family: 'Oswald'; 
+    font-size: 2rem; 
+    line-height: 1; 
+    z-index: 3; 
+}
+.project-card span { 
+    font-weight: 700; 
+    font-size: 0.8rem; 
+    opacity: 0.7; 
+    z-index: 3; 
+    margin-bottom: 0.5rem; 
+}
+.project-card:hover { 
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
 
 /* --- MODAL --- */
 .project-modal {
@@ -294,12 +334,32 @@ body.inverted .fade-separator {
     opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
 }
 .project-modal.active { opacity: 1; pointer-events: all; }
-.modal-content {
-    width: 50%; max-width: 800px; background: #09090b; color: #fff;
-    border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 4rem;
-    transform: scale(0.9); transition: transform 0.4s ease;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5); position: relative;
+
+.modal-project-image {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    z-index: 0;
+    border-radius: 8px;
 }
+
+.modal-content {
+    position: relative;
+    width: 50%; max-width: 800px;
+    background: rgba(9,9,11,0.9);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 4rem;
+    transform: scale(0.9);
+    transition: transform 0.4s ease;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.modal-content * { position: relative; z-index: 1; }
 .project-modal.active .modal-content { transform: scale(1); }
 .modal-close { position: absolute; top: 2rem; right: 2rem; background: none; border: none; font-size: 1.5rem; color: #fff; cursor: pointer; }
 .modal-close:hover { color: var(--primary); }

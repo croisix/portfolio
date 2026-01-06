@@ -27,17 +27,47 @@
     "backend": "BACK-END"
   },
   "work": {
-    "title": "Selected Work",
+    "title": "My Projects",
     "projects": {
-      "flower": {
-        "category": "E-COMMERCE - 2024",
-        "title": "FLOWER SHOP",
-        "desc": "A complete e-commerce platform built with Laravel and Stripe."
+      "pacman_java": {
+        "category": "GAME - 2023",
+        "title": "Pacman Java",
+        "desc": "A Pac‑Man game developed in JavaFX as a school project.",
+        "tags": ["Java", "JavaFX", "OOP"],
+        "icon": "images/projects/icons/pacman.png",
+        "modalImage": "images/projects/modal/pacman.png"
       },
-      "portfolio": {
-        "category": "PORTFOLIO - 2025",
-        "title": "MY PORTFOLIO",
-        "desc": "Personal portfolio designed to showcase my UI/UX skills."
+      "cinehub": {
+        "category": "WEB APP - 2025",
+        "title": "CineHub",
+        "desc": "Laravel web application for rating and discovering movies.",
+        "tags": ["Laravel", "PHP", "Blade"],
+        "icon": "images/projects/icons/cinehub.png",
+        "modalImage": "images/projects/modal/cinehub.png"
+      },
+      "web_marathon": {
+        "category": "WEBSITE - 2024",
+        "title": "Web Marathon",
+        "desc": "Collaborative site built with CS and MMI students over a two‑day marathon.",
+        "tags": ["PHP", "CSS", "JavaScript"],
+        "icon": "images/projects/icons/marathon.png",
+        "modalImage": "images/projects/modal/marathon.png"
+      },
+      "find_the_cocktail": {
+        "category": "MINI GAME - 2024",
+        "title": "Find The Cocktail",
+        "desc": "Flask mini‑game for guessing cocktail ingredients.",
+        "tags": ["Python", "Flask", "HTML", "CSS"],
+        "icon": "images/projects/icons/alcool.png",
+        "modalImage": "images/projects/modal/alcool.png"
+      },
+      "wedding_website": {
+        "category": "STATIC SITE - 2023",
+        "title": "Wedding Website",
+        "desc": "My first static website built as a university project.",
+        "tags": ["HTML", "CSS"],
+        "icon": "images/projects/icons/mariage.png",
+        "modalImage": "images/projects/modal/mariage.png"
       }
     }
   },
