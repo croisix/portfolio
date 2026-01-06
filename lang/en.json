@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "about": "ABOUT",
+    "skills": "SKILLS",
+    "work": "WORK",
+    "contact": "CONTACT",
+    "cv": "CV"
+  },
+  "hero": {
+    "hello": "Hey! 👋",
+    "subtitle": "I am a",
+    "role": "DEVELOPER"
+  },
+  "scroll": {
+    "down": "SCROLL DOWN"
+  },
+  "about": {
+    "title": "About me",
+    "text": "I'm a 19-year-old student from France Passionate about 🌸 visual design and making things"
+  },
+  "divider": {
+    "system": "System Check"
+  },
+  "skills": {
+    "title": "Skills",
+    "frontend": "FRONT-END",
+    "backend": "BACK-END"
+  },
+  "work": {
+    "title": "Selected Work",
+    "projects": {
+      "flower": {
+        "category": "E-COMMERCE - 2024",
+        "title": "FLOWER SHOP",
+        "desc": "A complete e-commerce platform built with Laravel and Stripe."
+      },
+      "portfolio": {
+        "category": "PORTFOLIO - 2025",
+        "title": "MY PORTFOLIO",
+        "desc": "Personal portfolio designed to showcase my UI/UX skills."
+      }
+    }
+  },
+  "contact": {
+    "index": "0.4 • CONTACT",
+    "title": "Have a project in mind?"
+  },
+  "footer": {
+    "copyright": "© 2026 Enzo Fantasia. All rights reserved."
+  }
+}

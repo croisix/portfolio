@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "about": "À PROPOS",
+    "skills": "COMPÉTENCES",
+    "work": "PROJETS",
+    "contact": "CONTACT",
+    "cv": "CV"
+  },
+  "hero": {
+    "hello": "Hey ! 👋",
+    "subtitle": "I am a",
+    "role": "DEVELOPER"
+  },
+  "scroll": {
+    "down": "SCROLL DOWN"
+  },
+  "about": {
+    "title": "Qui suis-je ?",
+    "text": "Étudiant de 21 ans en France à l'IUT de Lens, passionné par 🌸 le design visuel et la création."
+  },
+  "divider": {
+    "system": "System Check"
+  },
+  "skills": {
+    "title": "Compétences",
+    "frontend": "FRONT-END",
+    "backend": "BACK-END"
+  },
+  "work": {
+    "title": "Mes projets",
+    "projects": {
+      "flower": {
+        "category": "E-COMMERCE - 2024",
+        "title": "FLOWER SHOP",
+        "desc": "Une plateforme e-commerce complète développée avec Laravel et Stripe."
+      },
+      "portfolio": {
+        "category": "PORTFOLIO - 2025",
+        "title": "MON PORTFOLIO",
+        "desc": "Portfolio personnel conçu pour démontrer mes compétences en UI/UX."
+      }
+    }
+  },
+  "contact": {
+    "index": "0.4 • CONTACT",
+    "title": "Une idée de projet ? "
+  },
+  "footer": {
+    "copyright": "© 2026 Enzo Fantasia. Tous droits réservés."
+  }
+}

@@ -107,3 +107,45 @@ document.querySelector('.back-to-top').addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// --- I18N / MULTI-LANGUES ---
+let currentLang = localStorage.getItem('lang') || 'en';
+
+async function loadLanguage(lang) {
+    const res = await fetch(`lang/${lang}.json`);
+    const data = await res.json();
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const keys = el.dataset.i18n.split('.');
+        let value = data;
+        keys.forEach(k => value = value?.[k]);
+        if (value) el.textContent = value;
+    });
+
+    // Projets (dataset)
+    const projects = data.work.projects;
+    document.querySelectorAll('.project-card').forEach(card => {
+        const key = card.querySelector('h4')?.textContent.toLowerCase().includes('flower')
+            ? 'flower'
+            : 'portfolio';
+
+        card.dataset.category = projects[key].category;
+        card.dataset.title = projects[key].title;
+        card.dataset.desc = projects[key].desc;
+    });
+
+    document.documentElement.lang = lang;
+    localStorage.setItem('lang', lang);
+}
+
+// Bouton langue
+const langBtn = document.getElementById('lang-switch');
+if (langBtn) {
+    langBtn.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'fr' : 'en';
+        langBtn.textContent = currentLang === 'en' ? 'FR' : 'EN';
+        loadLanguage(currentLang);
+    });
+}
+
+loadLanguage(currentLang);
