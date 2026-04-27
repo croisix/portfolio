@@ -41,7 +41,7 @@ body.inverted {
     width: 20px; height: 20px;
     border-radius: 50%;
     position: fixed;
-    pointer-events: none; /* Crucial pour le clic */
+    pointer-events: none;
     z-index: 9999;
     background: #fff;
     mix-blend-mode: difference;
@@ -172,7 +172,6 @@ nav.nav-dark .lang-btn:hover {
     gap: 4rem;
     background-color: var(--bg-light);
     
-    /* On ajoute la même grille que la grid-bg globale */
     background-image: 
         linear-gradient(to right, rgba(0,0,0, 0.05) 1px, transparent 1px), 
         linear-gradient(to bottom, rgba(0,0,0, 0.05) 1px, transparent 1px);
@@ -417,32 +416,25 @@ footer {
     nav { padding: 1.5rem 2rem; }
     .hero-title { font-size: 2rem; }
     .about-section, .skills-section, .work-section { padding-left: 5%; padding-right: 5%; }
-    
-    /* La grille passe en 2 colonnes ou 1 selon la place */
     .bento-grid { gap: 1rem; }
 }
 
-/* 2. Mobile Standard (max 900px) - Le gros changement de layout */
 @media (max-width: 900px) {
-    /* Layout général */
     .hero { padding: 0; }
     .about-section { 
         border-radius: 40px 40px 0 0; 
         margin-top: -60px; 
         padding-top: 8rem;
         padding-bottom: 4rem;
-        grid-template-columns: 1fr; /* Une seule colonne */
+        grid-template-columns: 1fr;
     }
 
-    /* Navigation simplifiée */
     .nav-links { 
-        display: none; /* Idéalement, il faudrait un bouton Burger ici via JS */
+        display: none;
     }
-    /* On garde le bouton CV ou Langue accessible si possible, sinon on cache tout sauf le logo */
     nav { justify-content: center; } 
     nav > a { font-size: 1.2rem; }
 
-    /* Hero */
     .hero-intro {
         position: relative;
         top: 0; left: 0;
@@ -451,7 +443,7 @@ footer {
         width: 100%;
     }
     .stack-container { width: 100%; padding: 0 1rem; }
-    .highlight { font-size: 18vw; /* Texte géant responsive */ }
+    .highlight { font-size: 18vw; }
     
     /* About */
     .about-card { padding: 2rem; }
@@ -470,7 +462,7 @@ footer {
     .modal-content { 
         width: 90%; 
         max-height: 85vh; 
-        overflow-y: auto; /* Permet de scroller DANS la modale */
+        overflow-y: auto;
         padding: 2rem;
     }
     .modal-title { font-size: 2.5rem; }
@@ -479,4 +471,4 @@ footer {
     .contact-title { font-size: 1.8rem; }
     .minimal-email { font-size: 1rem; flex-direction: column; gap: 0.5rem; }
     footer { flex-direction: column; gap: 2rem; text-align: center; }
-}
+}   
